@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: java-mcp-demo
+server:
+  port: 8081
+#  main:
+    # \u5FC5\u987B\u7981\u7528\u63A7\u5236\u53F0\u65E5\u5FD7\u548C banner\uFF0C\u5426\u5219\u4F1A\u5E72\u6270\u901A\u4FE1
+#    web-application-type: none  # STDIO\u5FC5\u987B\u7981\u7528web\u5E94\u7528\u7C7B\u578B
+#    banner-mode: off           # STDIO\u7981\u7528banner
+
+# 天气API配置
+weather:
+  api:
+    # 请替换为你的OpenWeatherMap API密钥
+    # 获取免费API密钥：https://openweathermap.org/api
+    # 免费版每天可调用1000次
+    # 使用v2.5 API，因为v3.0需要付费订阅
+    key:   # 请替换为你的真实API密钥
+    url: http://api.openweathermap.org/data/2.5/weather
+---
+# 抖音API配置
+action-ai:
+  api:
+    key: 9e6868e608ad09db26081a9ba86313e0  # 请替换为你的真实API密钥
+    DouYinApiBaseUrl: https://www.action-ai.cn/index.php/api/index
+    querykeyUrl: https://www.action-ai.cn/index.php/api/key_query/queryKeyInfo
+---
+# Using spring-ai-starter-mcp-server
+spring:
+  ai:
+    mcp:
+      server:
+        name: stdio-mcp-server
+        version: 1.0.0
+        type: SYNC
+
+---
+# Using spring-ai-starter-mcp-server-webmvc
+spring:
+  ai:
+    mcp:
+      server:
+        name: webmvc-mcp-server
+        version: 1.0.0
+        type: SYNC
+        sse-message-endpoint: /mcp/messages
+---
+# Using spring-ai-starter-mcp-server-webflux
+spring:
+  ai:
+    mcp:
+      server:
+        name: webflux-mcp-server
+        version: 1.0.0
+        type: ASYNC  # Recommended for reactive applications
+        sse-message-endpoint: /mcp/messages
